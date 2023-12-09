@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+</head>
+<body>
+<div style="display: flex;" id="app">
+    <div style=" width:13%">
+        <div class="main">
+            <img src="./data/pic/Vector.png" alt="" class="img">
+            <h2 class="text1">{{name}}</h2>
+        </div>
+
+        <div class="main2">
+            <div  class="text2"><a href="./main.html">หน้าแรก</a></div>
+            <div class="text2"><a href="./workEnd.html">งานที่จบแล้ว</a></div>
+            <div class="text2"><a href="./Profile.html">ข้อมูลผู้จ้างงาน</a></div>
+            <div class="text2"><a href="./login.html">ออกจากระบบ</a></div>  
+        </div>
+    </div>
+
+    <div style="margin-left: 200px;">
+        <h1 style="text-align: center; margin-bottom:40px; margin-top:20px">เพิ่มงาน</h1>
+        <form>
+
+            <div class="form-row">
+        
+              <div class="form-group col-md-4">
+                <label for="inputPassword4">ตำแหน่งงาน</label>
+                <select name="" id="" class="form-control" v-model="position">
+                    <option value="คนขายหน้าร้าน">คนขายหน้าร้าน</option>
+                    <option value="วาดรูป">วาดรูป</option>
+                    <option value="ระบายสี">ระบายสี</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputPassword4">การรับสมัคร</label>
+                <select name="" id="" class="form-control" v-model="apply_type">
+                    <option value="1">รับเลย</option>
+                    <option value="2">พิจารณารายบุลคล</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="inputEmail4">รายได้/ชั่วโมง (บาท)</label>
+                  <input type="number" class="form-control" id="inputEmail4" v-model="pay">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inputPassword4">ชั่วโมงงาน</label>
+                  <input type="number" class="form-control" id="inputPassword4" v-model="hours">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inputPassword4">วันที่เริ่มทำงาน</label>
+                  <input type="date" class="form-control" id="inputPassword4" v-model="date_start">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputPassword4">ถึงวันที่</label>
+                    <input type="date" class="form-control" id="inputPassword4" v-model="date_end">
+                  </div>
+              </div>
+
+              <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputEmail4">เวลาเริ่มงาน</label>
+                <input type="time" class="form-control" id="inputEmail4" v-model="time_start">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputPassword4">ถึงเวลา</label>
+                <input type="time" class="form-control" id="inputPassword4" v-model="time_end">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputPassword4">จำนวนคนทำงาน</label>
+                <input type="number" class="form-control" id="inputPassword4" v-model="amount">
+              </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-7">
+                  <label for="inputEmail4">ช่องทางติดต่อ</label>
+                  <textarea name="" id="" cols="30" rows="3" class="form-control" v-model="contact"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-7">
+                  <label for="inputEmail4">ชื่อผู้ดูแลงาน</label>
+                  <input type="text" class="form-control" id="inputEmail4" v-model="name_care">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                  <label for="inputEmail4">ขอบเขตงาน</label>
+                  <textarea name="" id="" cols="30" rows="3" class="form-control" v-model="boundary"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                  <label for="inputEmail4">รายละเอียดงาน</label>
+                  <textarea name="" id="" cols="30" rows="3" class="form-control" v-model="detail"></textarea>
+                </div>
+            </div>
+
+
+              
+            
+            <button type="submit" class="btn btn-primary" style="margin-bottom: 100px;" @click="addwork()">เพิ่มงาน</button>
+          </form>
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="./data/data.js"></script>
+<script src="./data/user.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+<style>
+    .img{
+        align-items: center;
+        justify-content: center;
+        margin-left: 25%;
+    }
+    .main{
+        background-color: aqua;
+        width: 100%;
+        height: 10rem;
+        padding: 5px;
+        margin: 10px;
+    }
+    .text1{
+        margin-top: 25px;
+        text-align: center;
+        font-size: 20px;
+        
+    }
+    .main2{
+        margin-top: 20px;
+        margin-left: 5px;
+        
+    }
+    .text2{
+        margin-top: 20px;
+        font-size: 30px;
+        
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<script>
+
+  var app = new Vue({
+      el:"#app",
+      data:{
+          id:'',
+          name:'',
+          type:'',
+          position:'',
+          apply_type:'',
+          pay:'',
+          hours:'',
+          date_start:'',
+          date_end:'',
+          time_start:'',
+          time_end:'',
+          amount:'',
+          contact:'',
+          name_care:'',
+          boundary:'',
+          detail:'',
+          diff:0
+
+      },
+      methods:{
+          logout(){
+              localStorage.setItem('id','');
+          },
+          addwork(){
+
+            const data = {
+              id:this.id,
+              position:this.position,
+              apply_type:this.apply_type,
+              pay:this.pay,
+              hours:this.hours,
+              date_start:this.date_start,
+              date_end:this.date_end,
+              time_start:this.time_start,
+              time_end:this.time_end,
+              amount:this.amount,
+              contact:this.contact,
+              boundary:this.boundary,
+              detail:this.detail,
+              name:this.name_care
+            }
+
+            
+            
+
+            if ( this.position == "" || this.apply_type == '' || this.pay == '' ||
+             this.hours == '' || this.date_start == '' || this.date_end == '' || this.time_start == '' ||
+             this.time_end == '' || this.amount == '' || this.contact == '' || this.boundary == '' || this.detail == ''){
+                  alert("ข้อมูลผิดพลาด")
+             }
+             else{
+              alert("สำเร็จ")
+              const send = axios.post("http://localhost:3000/addwork",data) 
+              window.location.href="http://127.0.0.1:5500/font/main.html"
+
+             }
+
+          }
+      },
+
+      async created(){
+          this.id = await localStorage.getItem("id");
+
+          const urlParams = new URLSearchParams(window.location.search);
+          this.name = urlParams.get("name");
+          
+          
+        
+        
+      }
+  })
+</script>
+</html>

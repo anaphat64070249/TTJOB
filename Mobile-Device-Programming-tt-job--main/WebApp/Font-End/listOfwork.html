@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div  id="app">
+        <div style="display: flex;">
+            <div style="margin-right: 100px; width:13%">
+                <div class="main">
+                    <img src="./data/pic/Vector.png" alt="" class="img">
+                    <h2 class="text1">{{work.companyName}}</h2>
+                </div>
+    
+                <div class="main2">
+                    <div class="text2"><a href="./main.html">หน้าแรก</a></div>
+                    <div class="text2"><a href="./workEnd.html">งานที่จบแล้ว</a></div>
+                    <div class="text2"><a href="./Profile.html">ข้อมูลผู้จ้างงาน</a></div>
+                    <div class="text2"><a href="./login.html">ออกจากระบบ</a></div>
+                </div>
+            </div>
+    
+            <div>
+                <div  style=" margin-top:20px; width:100%; margin-left:225%">
+                    <div >
+                        <img :src="work.image_juristic" alt="" style="margin-left: -10%;" width="200px" height="200px">
+                        <h4>{{work.position}}</h4>
+                    </div>
+                    <div style=" margin-left:-40px">
+                        <h5 v-if="work.apply_type == 1">การสมัคร: พิจารณารายบุคล</h5>
+                        <h5 v-if="work.apply_type == 2">การสมัคร: พิจารณารายบุคล</h5>
+                        <h5>เวลาทำงาน:{{work.time_start}} - {{work.time_end}}</h5>
+                        <h5>ระยะเวลาทำงาน: {{work.working_hours}} วัน</h5>
+                        <h5>เริ่มงานวันที่: {{work.day_start}}</h5>
+                        <h5> จำนวน {{work.emp_amount}} ตำแหน่ง </h5>
+                    </div>
+    
+                </div>
+    
+                <div>
+                    <div style="margin-left: -40px; margin-top:60px; margin-bottom:20px">
+                        <h2>รายชื่อผู้ทำงาน</h2>
+                    </div>
+                </div>
+              
+    
+            </div>
+        </div>
+
+
+    <div class="row" style="margin-left: 20%;" v-for="item in peo">
+        <div class="col-8" style="border: 1px solid black; padding:20px; margin-bottom:10px">
+            <div style="display: flex;">
+                <div style="margin-right: 200px;">
+                    <h5>ชื่อ: {{item.firstName}} {{item.lastName}}</h5>
+                    <h5>อายุ: {{item.age}} ปี</h5>
+                    <h5>เพศ: {{item.gender}}</h5>
+                    <h5>อาชีพปัจจุบัน: {{item.occupation}}</h5>
+                    <h5>การศึกษา: {{item.education}}</h5>
+                    <h5>ชั่วโมงการทำงานทั้งหมด: {{item.experience_hour}} ชั่วโมง</h5>
+                    <h5>คะแนนเฉลี่ย: {{item.avg_score}} คะแนน</h5>
+                </div>
+                <div style="align-items: center; justify-content:center; margin-top:15px">
+                    <img :src="item.image_profile" alt="" style="margin-left: 1%; border-radius: 200px;" width="200px" height="170px">
+                    <div style="margin-top: 10px; padding:10px; margin-left:30px">
+                        <a :href="'./review.html?peo_id='+item.emp_id+'&work_id='+work_id"><button style="background-color: brown; color:aliceblue; width:100px">รีวิว</button></a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="./data/data.js"></script>
+    <script src="./data/user.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+<style>
+    .img {
+        align-items: center;
+        justify-content: center;
+        margin-left: 25%;
+    }
+
+    .main {
+        background-color: aqua;
+        width: 100%;
+        height: 10rem;
+        padding: 5px;
+        margin: 10px;
+    }
+
+    .text1 {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 20px;
+
+    }
+
+    .main2 {
+        margin-top: 20px;
+        margin-left: 5px;
+
+    }
+
+    .text2 {
+        margin-top: 20px;
+        font-size: 30px;
+
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .worker {
+        display: flex;
+        border: 1px solid black;
+        padding: 10px;
+        margin-top: 10px;
+    }
+</style>
+
+<script>
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            id: '',
+            work_id:'',
+            peo:[],
+            work:[]
+        },
+        methods: {
+            logout() {
+                localStorage.setItem('id', '');
+            },
+            
+            
+        },
+        async created() {
+            this.id = await localStorage.getItem("id");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            this.work_id = urlParams.get("work_id");
+
+            const people = await axios.post("http://localhost:3000/peend",{id:this.work_id});
+
+            this.peo = people.data.people;
+
+
+            const app = await axios.post("http://localhost:3000/applicans",{work_id:this.work_id});
+
+            this.work = app.data.work[0]
+        }
+    })
+</script>
+
+</html>

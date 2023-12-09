@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./mycompo.js"></script>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./css/tabel2.css">
+</head>
+
+<body>
+    <div id="app" style="display: flex;">
+        <div> <my-component></my-component></div>
+
+        <div class="sss">
+            <div class="row1">
+                <div class="row">
+                    <h2 v-if="check == 1 || check == 2" >รายละเอียดสมาชิก</h2>
+                    <h2 v-else>รายละเอียดผู้สมัครผู้สมัคร</h2>
+                </div>
+
+                <div v-if="check==1 || check == 2">
+                    <div class="cc">
+                        <img :src="pofile.image_profile" alt="" v-if="check == 1">
+                        <img :src="pofile.image_company" alt="" v-if="check == 2">
+                    <h2 v-if="check == 1">{{pofile.firstName}} {{pofile.lastName}}</h2>
+                    <h2 v-if="check == 2">{{pofile.companyName}}</h2>
+                    <h4 v-if="check == 1">ชั่วโมงการทำงานทั้งหมด : {{pofile.experience_hour}} ชั่วโมง</h4>
+                    <h4>คะแนนการทำงานเฉลี่ย : {{pofile.avg_score}} คะแนน</h4>
+                    </div>
+                    <table>
+                        <tr>
+                            <th><h2 style="text-align: center;">รีวิว</h2></th>
+                            <th><h2 style="text-align: center;">คะแนน</h2></th>
+                        </tr>
+                        <tr v-for="item in review" :key="comments">
+                            <td>{{item.comments}}</td>
+                            <td>{{item.score}}</td>
+                        </tr>
+                    </table>
+                    <button style="background-color: red; color:aliceblue; margin:20px; margin-left:30px" @click="del()" >ระงับการใช้งาน</button>
+                </div>
+                
+                <div v-else-if="check == 3" class="three">
+                    <div class="cc">
+                        <img :src="pofile.image_profile" alt="">
+                    </div>
+                    <div>
+                        <h4>ชื่อ : {{pofile.firstName}} {{pofile.lastName}}</h4>
+                        <h4>ชื่อเล่น : {{pofile.nickName}}</h4>
+                        <h4>อีเมล์ : {{pofile.email}}</h4>
+                        <h4>เบอร์โทร : {{pofile.phone}}</h4>
+                        <h4>อายุ : {{pofile.age}}</h4>
+                        <h4>เพศ : {{pofile.gender}}</h4>
+                        <h4>รหัสบัตรประชาชน : {{pofile.personal_id}}</h4>
+                        <img :src="pofile.image_personalID" alt="" width="600px" height="700px"> 
+                        <h4>วันเกิด : {{pofile.date_of_birth}}</h4>
+                        <h4>น้ำหนัก : {{pofile.weight}}</h4>
+                        <h4>ส่วนสูง : {{pofile.height}}</h4>
+                        <h4>อาชีพ : {{pofile.occupation}}</h4>
+                        <h4>การศึกษา : {{pofile.education}}</h4>
+                        <h4>ความสามารถ : {{pofile.abilities}}</h4>
+                        <h4>ที่อยู่ : {{pofile.address}} {{pofile.tumbon}} {{pofile.district}} {{pofile.province}} {{pofile.zipCode}}</h4>
+                        <h4>รถ : {{pofile.vehicle}}</h4>
+                        <h4>เกี่ยวกับรถ : {{pofile.driver_license}}</h4>
+                        <div style="margin-bottom: 30px; margin-top:30px"> 
+                            <button style="background-color: red; color:aliceblue; width:70px" @click="cancel()">ปฏิเสธ</button>
+                            <button style="background-color: green; color:aliceblue; width:70px" @click="confirm()">ยืนยัน</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-else-if="check == 4" class="four">
+                    <div class="cc">
+                        <img :src="pofile.image_company" alt="">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <h4>ชื่อบริษัท : {{pofile.companyName}}</h4>
+                        <h4>อีเมล์ : {{pofile.email}}</h4>
+                        <h4>เบอร์โทร : {{pofile.phone}}</h4>
+                        <h4>เลขนิติบุคคล : {{pofile.juristic_id}}</h4>
+                        <img :src="pofile.image_juristic" alt="" width="600px" height="700px"> 
+                        <h4>ประเภท : {{pofile.bussines_type}}</h4>
+                        <h4>ที่อยู่ : {{pofile.address}} {{pofile.tumbon}} {{pofile.district}} {{pofile.province}} {{pofile.zipCode}}</h4>
+                        <h4>เกี่ยวกับบริษัท : {{pofile.descriptions}}</h4>
+                        <div>
+                            <button style="background-color: red; color:aliceblue" @click="cancel()">ปฏิเสธ</button>
+                            <button style="background-color: green; color:aliceblue" @click="confirm()">ยืนยัน</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div >
+                    
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="./data/data.js"></script>
+    <script src="./data/user.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+<style>
+
+
+</style>
+
+<script>
+
+
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            check:'',
+            id:'',
+            review:[],
+            pofile:[]
+        },
+       async created(){
+            const urlParams = new URLSearchParams(window.location.search);
+            this.check = urlParams.get("check");
+            this.id = urlParams.get("id")
+            
+        if (this.check == 1){
+            const send =await axios.post("http://localhost:3000/1",{id:this.id})
+            this.review = send.data.review
+            this.pofile = send.data.profile;
+        }
+        else if (this.check == 2){
+            const send2 =await axios.post("http://localhost:3000/2",{id:this.id})
+            this.review = send2.data.review
+            this.pofile = send2.data.profile;
+        }
+        else if (this.check == 3){
+            const send3 =await axios.post("http://localhost:3000/3",{id:this.id})
+            this.pofile = send3.data.profile;
+        }
+        else if (this.check == 4){
+            const send4 =await axios.post("http://localhost:3000/4",{id:this.id})
+            this.pofile = send4.data.profile;
+        }
+
+        },
+        methods: {
+            del(){
+                alert("ลบสำเร็จ")
+                const send4 = axios.post("http://localhost:3000/delete",{id:this.id,check:this.check})
+                window.location.href = "http://127.0.0.1:5500/font/admin/dashboard.html"
+            },
+            cancel(){
+                alert("ยกเลิกสำเร็จ")
+                const send = axios.post("http://localhost:3000/can",{id:this.id,check:this.check})
+                window.location.href = "http://127.0.0.1:5500/font/admin/dashboard.html"
+            },
+            confirm(){
+                alert("ยืนยันสำเร็จ")
+                const send = axios.post("http://localhost:3000/con",{id:this.id,check:this.check})
+                window.location.href = "http://127.0.0.1:5500/font/admin/dashboard.html"
+            }
+
+
+        },
+
+    })
+</script>
+
+</html>

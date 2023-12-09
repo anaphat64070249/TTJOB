@@ -1,0 +1,44 @@
+.frame{
+    margin-right: 190px;
+}
+
+.main{
+    background-color: #048CB7;
+    width: 12rem;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+ }
+
+ .main h1{
+    text-align: center;
+    
+ }
+
+ .main img{
+    align-items: center;
+    justify-content: center;
+    margin-left: 45px;
+    margin-top: 10px;
+ }
+
+ .main2{
+    margin-top: 18px;
+    position: absolute;
+    top: 8rem;
+    background-color: aliceblue;
+    width: 12rem;
+    height: 100%;
+}
+
+.main2 a{
+
+    margin-left: 5px;
+    margin-top: 20px;
+    font-size: 20px;
+    
+}
+
+.eiei{
+    margin-top: 15px;
+}

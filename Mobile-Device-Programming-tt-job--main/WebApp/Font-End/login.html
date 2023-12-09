@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-light  head">
+            <div class="container-fluid">
+              <a class="navbar- " href="login.html">
+                <img src="./asset/Screenshot 2023-09-15 172527 1.png" alt="" width="100" height="100" class="d-inline-block align-text-top img"  >
+              </a>
+            </div>
+        </nav>
+        
+        <section class="vh-100">
+            <div class="container-fluid h-custom">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                  <form>        
+          
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example3"><h3>Telephone number & Email</h3></label>
+                      <input type="email" id="form3Example3" class="form-control form-control-lg"
+                        placeholder="Enter a Telephone number or Email" v-model="Email"/>
+                    
+                    </div>
+          
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label" for="form3Example4"><h3>Password</h3></label>
+                      <input type="password" id="form3Example4" class="form-control form-control-lg"
+                        placeholder="Enter password" v-model="password"/>
+                      
+                    </div>
+          
+
+          
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                      <button type="button" class="btn btn-primary btn-lg"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;" @click="login()">Login</button>
+                      <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="register.html"
+                          class="link-danger">Register</a></p>
+                          <br>
+                            <div v-show="check" style="color: red;">
+                                <h3>can not Login please check Email or password again</h3>
+                            </div>
+                            
+                    </div>
+          
+                  </form>
+                </div>
+              </div>
+            </div>
+            {{test}}
+          </section>
+
+        
+
+    </div>
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./data/data.js"></script>
+    <script src="./data/user.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+<style>
+
+    .h-custom {
+    height: calc(100% - 73px);
+    }
+
+    .img{
+        margin-left: 700%;
+    }
+
+    .head{
+        background-color: #01B495;
+    }
+
+</style>
+<script>
+    // import axios from "@/plugins/axios";
+    //import data from "./data/data.js"
+    
+    var app = new Vue({
+        el: "#app",
+        data: {
+            Email:'',
+            password:'',
+            check:false,
+            data:data.data,
+            user:user.user[0],
+            test:'',
+            id:''
+        },
+        methods:{
+            
+
+             async login(){
+
+              const dataa = {
+                email:this.Email,
+                pass:this.password
+              };
+
+              const item =await  axios.post("http://localhost:3000/test",dataa);
+              this.test =  item.data.check;
+              this.id = item.data.row.com_id;
+              
+              console.log(this.id)
+              console.log(this.test)
+
+              
+              if (this.test == "1"){
+                window.location.href= "http://127.0.0.1:5500/font/main.html"
+                //setlocalstorage
+                localStorage.setItem("id",this.id);
+              }
+              else if (this.test == "0"){
+                alert("กรอกชื่อผู้ใช้ หรือ รหัสผ่านผิดพลาด")
+              }
+              
+                
+            }
+        },
+        created(){
+          
+        }
+ 
+    })
+</script>
+</html>

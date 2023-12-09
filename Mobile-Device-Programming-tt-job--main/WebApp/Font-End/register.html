@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-light  head">
+            <div class="container-fluid">
+              <a class="navbar- " href="login.html">
+                <img src="./asset/Screenshot 2023-09-15 172527 1.png" alt="" width="100" height="100" class="d-inline-block align-text-top img"  >
+              </a>
+            </div>
+        </nav>
+        
+        <section class="vh-100" style="background-color: white; ">
+            <div class="container h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-9" style="border: 1px solid black; margin-top:20px;" >
+          
+                  <h1 class="text-black mb-10" style="text-align: center;">สมัครสมาชิก</h1>
+          
+                  <div class="card" style="border-radius: 15px;">
+                    <div class="card-body">
+          
+                        <form enctype="multipart/form-data">
+
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">ชื่อบริษัท / สถานประกอบการ</label>
+                              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="name">
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">เบอร์โทรศัทพ์</label>
+                              <input type="number" class="form-control" id="exampleInputText" v-model="tel">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">อีเมล์</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="email">
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">รหัสผ่าน</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" v-model="password">
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">ที่อยู่</label>
+                                <textarea type="text" class="form-control" id="exampleInputTextarea" v-model="address"></textarea>
+                              </div>
+
+                              <div class="mb-3" style="display: flex;">
+                                <div style="width: 50%; margin-right:10px;">
+                                    <label for="exampleInputPassword1" class="form-label">เลือกจังหวัด</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="provi">
+                                    <!-- <select name="" id="" style="width: 100%;" v-model="province_id">
+                                      {{province_id}}
+                                          <option  v-for="item in province"  :key="item.id"
+                                          :value="item.id">{{item.name_th}}</option>
+                                    </select> -->
+                                </div>
+
+                                <div style="width: 50%;">
+                                    <label for="exampleInputPassword1" class="form-label">เลือกอำเภอ</label>
+                                    <!-- <select name="" id="" style="width: 100%;" v-model="amphures_id">
+                                        <option value="" v-for="item in amphur" :key="item" v-if="item.province_id == province_id" :key="item.id"
+                                        :value="item.id">{{item.name_th}}</option>
+                                    </select> -->
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="amphu">
+                                </div>
+                              </div>
+                            
+                              <div class="mb-3" style="display: flex;">
+                                <div style="width: 50%; margin-right:10px;">
+                                    <label for="exampleInputPassword1" class="form-label">เลือกตำบล</label>
+                                    <!-- <select name="" id="" style="width: 100%;" v-model="tambons_id">
+                                      <option v-for="item in tambon" :key="item.id" :value="item.id" v-if="item.amphure_id == amphures_id">
+                                        {{ item.name_th }}
+                                      </option>   
+                                    </select> -->
+                                    <!-- <option value="" v-for="item in "></option> -->
+                                    <input type="text" class="form-control" id="exampleInputPassword1" v-model="tam">
+                                </div>
+
+                                <div style="width: 50%;">
+                                    <label for="exampleInputPassword1" class="form-label">รหัสไปรษณีย์</label>
+                                    <input name="" id="" style="width: 100%;" v-model="code">
+                                </div>
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">เลขนิติบุคคล</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" v-model="num">
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">อัพโหลดสำเนานิติบุลคล(ถ้ามี)</label>
+                                <input type="file" class="form-control" id="file" placeholder="อัพโหลหดรูปภาพ"  @change="selectImages" multiple >
+                              </div>
+
+
+
+                              <div class="mb-3" style="display: flex;">
+                                <div style="width: 50%; margin-right:10px;">
+                                    <label for="exampleInputPassword1" class="form-label">ประเภทบริษัท/สถานประกอบการ</label>
+                                    <select name="" id="" style="width: 150%;" v-model="type_com">  
+                                      <option value="ทั่วไป" selected>ทั่วไป</option>
+                                      <option value="ค้าขาย">ร้านอาหาร</option>
+                                      <option value="ส่งออก">โรงงานอุตสาหกรรม</option>
+                                      <option value="ส่งออก">สถานบันเทิง</option>
+                                    </select>
+                                </div>
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">ข้อมูลเกี่ยวกับบริษัท/สถานประกอบการ</label>
+                                <textarea type="text" class="form-control" id="exampleInputTextarea" v-model="about"></textarea>
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">อัพโหลดรูปถ่ายสัญลักษณ์/ตราบริษัท/สถานที่</label>
+                                <input type="file" class="form-control" id="exampleInputPassword1" @change="selectImages2">
+                              </div>
+
+                              <div style="margin-bottom: 30px; margin-top:20px">
+                                <input type="checkbox">
+                                คุณยอมรับเงื่อนไขและนโยบายการสมัครสมาชิกของเรา 
+                                <h6><a href="#">อ่านเงื่อนไขและนโยบาย</a></h6>
+                              </div>
+
+                            <button type="button" class="btn btn-primary" @click="register()">Submit</button>
+                          </form>
+                          
+          
+                </div>
+              </div>
+            </div>
+          </section>
+
+        
+
+    </div>
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./data/amphures.js"></script>
+    <script src="./data/province.js"></script>
+    <script src="./data/tambons.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+<style>
+
+    .h-custom {
+    height: calc(100% - 73px);
+    }
+
+    .img{
+        margin-left: 700%;
+    }
+
+    .head{
+        background-color: #01B495;
+    }
+
+</style>
+<script>
+    
+    //import data from "./data/data.js"
+    
+    var app = new Vue({
+        el: "#app",
+        data: {
+            name:'',
+            tel:'',
+            email:'',
+            password:'',
+            address:'',
+            img1:[],
+            img2:[],
+            phone:'',
+            type_com:'',
+            about:'',
+            provi:'',
+            amphu:'',
+            tam:'',
+            code:'',
+            num:'',
+            
+            amphur:amphures,
+            province: province,
+            tambon:tambons,
+            province_id:0,
+            amphures_id:0,
+            tambons_id:0
+
+        },
+        methods:{
+          selectImages(event) {
+            console.log(event.target.files[0].name)
+            this.img1 = event.target.files[0];
+          },
+          selectImages2(event) {
+            console.log(event.target.files[0].name)
+            this.img2 = event.target.files[0];
+          },
+          register(){
+
+            let formData = new FormData();
+            let formData2 = new FormData();
+            //this.img1.forEach((image) => {
+             // formData.append("myImage", image);
+            //});
+              console.log("dad",this.img1)
+              formData.append("myImage",this.img1)
+              formData.append("myImage",this.img2)
+              // formData2.append("myImage2",this.img2)
+              
+              const data = {
+                name:this.name,
+                tel:this.tel,
+                email:this.email,
+                pass:this.password,
+                address:this.address,
+                province:this.provi,
+                amphur:this.amphu,
+                tambon:this.tam,
+                code:this.code,
+                about:this.about,
+                num:this.num,
+                type:this.type_com
+              }
+
+              formData.append("name",this.name)
+              formData.append("tel",this.tel)
+              formData.append("email",this.email)
+              formData.append("pass",this.password)
+              formData.append("address",this.address)
+              formData.append("province",this.provi)
+              formData.append("amphur",this.amphu)
+              formData.append("tambon",this.tam)
+              formData.append("code",this.code)
+              formData.append("about",this.about)
+              formData.append("num",this.num)
+              formData.append("type",this.type_com)
+              
+            //const send = axios.post("http://localhost:3000/register", formData)
+
+            //const send2 = axios.post("http://localhost:3000/register2", formData2)
+
+            // const send3 =  axios.post("http://localhost:3000/register3", {data:data})
+
+            const send3 =  axios.post("http://localhost:3000/register3",formData)
+          }
+          
+          
+
+
+          
+        },
+
+ 
+    })
+</script>
+</html>
